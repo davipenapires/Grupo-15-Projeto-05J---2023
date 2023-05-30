@@ -3,9 +3,9 @@ Instituição: Universidade Presbiteriana Mackenzie | Professor: Wallace Rodrigu
 
 Componentes do grupo:
 
-Beatriz Alves - 32118929
-Davi Pena - 32140381
-Letícia Silva - 32157843
+Beatriz Alves - 32118929 |
+Davi Pena - 32140381 |
+Letícia Silva - 32157843 |
 Mirella Monção - 32016778
 ____________________________________________________________________________________________________________________________
 
