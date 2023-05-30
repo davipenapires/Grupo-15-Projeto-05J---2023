@@ -1,0 +1,163 @@
+[
+    {
+        "id": "121abef3a0be9686",
+        "type": "tab",
+        "label": "ESP32+DHT22",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5522ef12d278bfd3",
+        "type": "mqtt in",
+        "z": "121abef3a0be9686",
+        "name": "MQTT Node",
+        "topic": "medirtemperatura/Temperatura",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "91ed84411439269c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "3bd55320d854e344",
+                "d47208562975c864"
+            ]
+        ]
+    },
+    {
+        "id": "3bd55320d854e344",
+        "type": "function",
+        "z": "121abef3a0be9686",
+        "name": "Mensagem",
+        "func": "var newMsg = { payload: msg.payload };\nvar phoneNumber = \"5511966215817\";\nvar apiKey = \"7290390\";\nnewMsg.url = \"https://api.callmebot.com/whatsapp.php?phone=\" + phoneNumber + \"&text=A temperatura é: \" + encodeURIComponent(newMsg.payload) + \"&apikey=\" + apiKey;\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "b559e84fc2d1214d"
+            ]
+        ]
+    },
+    {
+        "id": "b559e84fc2d1214d",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "121abef3a0be9686",
+        "name": "",
+        "account": "44169a5f294fb165",
+        "text": "payload",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "e8b9b5825c1f1457"
+            ]
+        ]
+    },
+    {
+        "id": "e8b9b5825c1f1457",
+        "type": "debug",
+        "z": "121abef3a0be9686",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d47208562975c864",
+        "type": "influxdb out",
+        "z": "121abef3a0be9686",
+        "influxdb": "fe8c933d5dba5ffc",
+        "name": "InfluxDB Node",
+        "measurement": "temperatura",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Grupo 15",
+        "bucket": "Arduino",
+        "x": 780,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "91ed84411439269c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "tls": "68ef9d6a5ab4bae8",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "true",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "44169a5f294fb165",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "davi-bot-api"
+    },
+    {
+        "id": "fe8c933d5dba5ffc",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://us-east-1-1.aws.cloud2.influxdata.com",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "68ef9d6a5ab4bae8",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
